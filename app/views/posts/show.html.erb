@@ -1,10 +1,15 @@
-<h1 class = "title"> <%= @post.title %> </h1>
-
-<p class="date">
-  Submtted <%= time_ago_in_words(@post.created_at) %>
-</p>
-
-<p class="body">
-  <%= @post.body %>
-</p>
-
+<div class="container">
+<div class="panel-heading main-color-bg">
+    <h3 class="panel-title"><%= @post.title %> </h3> 
+</div>
+        <div class="panel-body">
+                <div class="post_wrapper">
+                    <p class="body_text"><%= @post.body %></p>
+                    <p class="date body_text">Created at: <%= @post.created_at%>
+                        <button class="button-Primary button_create"><%=link_to 'Delete', post_path(@post), method: :delete, data: {confirm: 'Are you Sure?'}, class:"create_link" %></button>
+                        
+                        <button class="button-Primary button_create"><%=link_to "Edit", :edit_post, class:"create_link" %></button>
+                    </p>
+                </div>
+        </div>
+</div>

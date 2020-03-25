@@ -1,6 +1,16 @@
-<% @posts.each do |post| %>
-<div class="post_wrapper">
-<h2 class="title"><%= link_to post.title, post %></h2>
-<p class="date"><%= time_ago_in_words(post.created_at) %>  ago</p>
+<div class="panel panel-default">
+    <div class="panel-heading main-color-bg">
+        <h3 class="panel-title">List of Posts<button class="button-Primary button_create"><%=link_to "Create Post", :new_post, class:"create_link" %></button></h3> 
+        
+       
+    </div>
+        <div class="panel-body">
+             <% @posts.each do |post| %>
+                <div class="post_wrapper">
+                    <h2 class="title"><%= link_to post.title, post, class:"title_link" %></h2>
+                    <h4 class="summary"><%= post.body[0, 40]%>...</h4>
+                    <p class="date"><%= time_ago_in_words(post.created_at) %>  ago</p>
+                </div>
+            <%end%>
+        </div>
 </div>
-<%end%>
