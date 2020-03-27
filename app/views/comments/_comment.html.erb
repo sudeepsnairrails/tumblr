@@ -1,0 +1,15 @@
+<div class="container">
+    <div class="clearfix">
+        <p>
+            <strong><%=comment.name%></strong>
+        </P>
+        <p>
+            <%=comment.body%>
+        </P>
+        <p class="date body_text">
+            <%=time_ago_in_words(comment.created_at)%> Ago
+        </P>
+    </div>
+    <%=link_to 'Delete', [comment.post,comment], method: :delete, data: {confirm: 'Are you Sure?'}, class:"normal_link" %>
+<hr>
+</div>

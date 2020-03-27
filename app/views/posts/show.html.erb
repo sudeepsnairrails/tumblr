@@ -7,9 +7,14 @@
                     <p class="body_text"><%= @post.body %></p>
                     <p class="date body_text">Created at: <%= @post.created_at%>
                         <button class="button-Primary button_create"><%=link_to 'Delete', post_path(@post), method: :delete, data: {confirm: 'Are you Sure?'}, class:"create_link" %></button>
-                        
                         <button class="button-Primary button_create"><%=link_to "Edit", :edit_post, class:"create_link" %></button>
                     </p>
+                </div>
+                <div class="comments">
+                 <h3> <%= @post.comments.count %> Comments</h3>
+                    <%= render @post.comments %>
+                    <h4>Add Comment </h4>
+                    <%= render "comments/form" %>
                 </div>
         </div>
 </div>
