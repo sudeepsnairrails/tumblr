@@ -11,6 +11,10 @@
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
     <%= favicon_link_tag 'favicon.ico' %>
     <%= csrf_meta_tags %>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
   </head>
 
   <body>
@@ -24,24 +28,42 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="#">Tumblr.</a>
+          <a class="navbar-brand" href="#"><b>Tumblr.</b></a>
         </div>
+       
         <div id="navbar" class="collapse navbar-collapse">
           <ul class="nav navbar-nav">
             <li><%=link_to "Home", :root %></li>
-            <li class="active"><a href="pages.html">Posts</a></li>
-            <li><a href="users.html">About</a></li>
+            <li class="active"><%=link_to "Posts", :posts %></li>
+            <li><%=link_to "About", :about %></li>
           </ul>
-
+        <%if user_signed_in? %>
           <ul class="nav navbar-nav navbar-right">
-            <li><a href="#">Welcome, Chakki</a></li>
-            <li><a href="login.html">Login</a></li>
-            <li><a href="login.html">Logout</a></li>
+            <li class="nav-item dropdown"><a>You have logged in as: 
+               <b> <%=current_user.name%> </b>
+            </li></a>    
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown"><%= image_tag  "profile.jpg", size: "20x20", class: "profile-image img-circle"%> <b class="caret"></b></a>
+              <ul class="dropdown-menu">
+                  <li align="center">
+                    <a href="#" >Profile</a>
+                    <%= link_to('Logout', destroy_user_session_path, method: :delete) %>   
+                  </li>
+              </ul>
+            </li>         
+          </ul> 
         </div>
-          </ul>
-        </div><!--/.nav-collapse -->
+        <%else%>
+        <ul class="nav navbar-nav navbar-right">
+            <li class="nav-item dropdown">
+              <b><%= link_to('Login', new_user_session_path, method: :get) %>  </b>
+            </li>
+        </ul>
+        <%end%>
       </div>
-    </nav>
+        
+  </nav>
+
   <header id="header">
       <div class="container">
         <div class="row">
@@ -50,8 +72,6 @@
             </div>
           </div>
         </div>
-      </div>
-
     </header>
 
 
@@ -61,7 +81,7 @@
           <div class="col-md-3">
             <div class="list-group">
               <%= link_to "<span class=\"glyphicon glyphicon-cog\" aria-hidden=\"true\"></span> Home".html_safe, root_path('messages'),class: "list-group-item active main-color-bg" %>
-              <a href="pages.html" class="list-group-item"><span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span> Posts<span class="badge">12</span></a>
+              <%= link_to "<span class=\"glyphicon glyphicon-list-alt\" aria-hidden=\"true\"></span> Posts<span class=\"badge\">#{Post.count}</span>".html_safe, posts_path('messages'),class: "list-group-item" %>
               <a href="posts.html" class="list-group-item"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span> About</span> <span class="badge">2</span></a>
               <a href="users.html" class="list-group-item"><span class="glyphicon glyphicon-user" aria-hidden="true"></span> Users</span><span class="badge">10</span></a>
             </div>
@@ -71,14 +91,14 @@
           </div>
         </div>
       </div>
-    </section>
+</section>
 
 <footer id="footer">
       <p>Copy right: Chakkappan &copy 2020</p>
 </footer>
 
 
-  </body>
+</body>
 
 </html>
 
